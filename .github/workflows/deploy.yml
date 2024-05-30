@@ -10,6 +10,8 @@ on:
 jobs:
   deploy:
     name: Deploy to shinyapps
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     # allow skipping deployment for commits containing '[automated]' or '[no-deploy]' in the commit message
     if: "!contains(github.event.head_commit.message, '[automated]') && !contains(github.event.head_commit.message, '[no-deploy]')"
@@ -23,6 +25,7 @@ jobs:
       - name: Install R packages
         run: |
           install.packages("remotes")
+          remotes::install_github("mitchelloharawild/icons")
           remotes::install_github("mitchelloharawild/icons")
           icons::download_health_icons()
           remotes::install_github("Open-Systems-Pharmacology/OSPSuite-R")
