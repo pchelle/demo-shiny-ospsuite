@@ -22,7 +22,7 @@ jobs:
           use-public-rspm: true
       - name: Install R packages
         run: |
-          install.packages(c('remotes', 'dplyr', 'tidyr', 'purrr', 'patchwork', 'readxl','data.table', 'gridtext', 'ggtext')
+          install.packages(c('remotes', 'dplyr', 'tidyr', 'purrr', 'patchwork', 'readxl','data.table', 'gridtext', 'ggtext'))
           remotes::install_github("mitchelloharawild/icons")
           remotes::install_github("jespermaag/gganatogram")
           #icons::download_health_icons()
