@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+    - name: Print Public IP
+      run: |
+        echo ${{ steps.ip.outputs.ipv4 }}
+        echo ${{ steps.ip.outputs.ipv6 }}
       - name: Setup
         uses: r-lib/actions/setup-r@v2
         with: 
@@ -35,6 +42,6 @@ jobs:
         shell: Rscript {0}
       - name: Run app
         run: |
-          shiny::runApp(port = 5001, host = "0.0.0.0")
+          shiny::runApp(port = ${{ steps.ip.outputs.ipv4 }}, host = "0.0.0.0")
         shell: Rscript {0}
         
