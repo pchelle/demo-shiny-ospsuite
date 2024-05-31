@@ -18,8 +18,8 @@ jobs:
           use-public-rspm: true
       - name: Install all R packages
         run: |
-          install.packages(c('dplyr','purrr','covr','readr','tidyr','webshot','spelling','readxl','data.table','gridtext','ggtext','tidyselect','testthat','rmarkdown','pkgdown','openxlsx'), repos = 'http://cran.us.r-project.org', type='win.binary')
-          install.packages(c('shiny','shinydashboard','shinyWidgets','ggplot2', 'remotes'), repos = 'http://cran.us.r-project.org', type='win.binary')
+          install.packages(c('dplyr','purrr','covr','readr','tidyr','webshot','spelling','readxl','data.table','gridtext','ggtext','tidyselect','testthat','rmarkdown','pkgdown','openxlsx'))
+          install.packages(c('shiny','shinydashboard','shinyWidgets','ggplot2', 'remotes'))
           remotes::install_github("mitchelloharawild/icons@v0.1.0")
           remotes::install_github("jespermaag/gganatogram")
           install.packages('https://github.com/Open-Systems-Pharmacology/rClr/releases/download/v0.9.1/rClr_0.9.1.zip', repos = NULL, type = 'binary')
