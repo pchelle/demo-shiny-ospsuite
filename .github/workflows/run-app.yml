@@ -1,7 +1,8 @@
 name: Run App Locally
 
 on:
-  push
+  push:
+  workflow_dispatch:
 
 jobs:
   run-app:
@@ -42,6 +43,6 @@ jobs:
         shell: Rscript {0}
       - name: Run app
         run: |
-          shiny::runApp(port = ${{ steps.ip.outputs.ipv4 }}, host = "0.0.0.0")
+          shiny::runApp(port = 8000, host = "${{ steps.ip.outputs.ipv4 }}")
         shell: Rscript {0}
         
