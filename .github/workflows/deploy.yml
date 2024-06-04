@@ -27,13 +27,12 @@ jobs:
           sudo apt-get install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
       - name: Install R packages
         run: |
-          install.packages(c('remotes', 'dplyr', 'tidyr', 'purrr', 'patchwork', 'readxl','data.table', 'gridtext', 'ggtext'))
-          remotes::install_github("mitchelloharawild/icons")
-          remotes::install_github("jespermaag/gganatogram")
-          #icons::download_health_icons()
-          remotes::install_github("Open-Systems-Pharmacology/OSPSuite.RUtils")
-          remotes::install_github("Open-Systems-Pharmacology/TLF-Library")
-          remotes::install_github("Open-Systems-Pharmacology/OSPSuite-R@v11.3.520")
+          install.packages('pak')
+          pak::pak("mitchelloharawild/icons")
+          pak::pak("jespermaag/gganatogram")
+          pak::pak("Open-Systems-Pharmacology/rClr")
+          pak::pak("Open-Systems-Pharmacology/OSPSuite-R@v11.3.520")
+          icons::download_health_icons()
         shell: Rscript {0} 
       - name: deploy
         uses: BDSI-Utwente/shinyapps-deploy-github-action@v1
