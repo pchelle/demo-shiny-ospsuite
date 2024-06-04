@@ -2,7 +2,7 @@ name: Deploy to shinyapps.io
 on:
 
   # run on any push 
-  #push:
+  push:
   # run on request (via button in actions menu)
   workflow_dispatch:
       
@@ -20,6 +20,11 @@ jobs:
         with:
           r-version: '4.1.0'
           use-public-rspm: true
+      - name: Instal .NET
+        run: |
+          sudo apt-get install dotnet-runtime-8.0 libcurl4-openssl-dev libssl-dev libxml2-dev 
+          sudo apt-get install libfontconfig1-dev libharfbuzz-dev libfribidi-dev
+          sudo apt-get install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
       - name: Install R packages
         run: |
           install.packages(c('remotes', 'dplyr', 'tidyr', 'purrr', 'patchwork', 'readxl','data.table', 'gridtext', 'ggtext'))
