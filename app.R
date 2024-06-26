@@ -3,11 +3,15 @@
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
-library(icons)
+#library(icons)
 library(ospsuite)
 library(gganatogram)
 library(dplyr)
 library(ggplot2)
+
+# Specify the application port
+options(shiny.host = "0.0.0.0")
+options(shiny.port = 8180)
 
 #------ Pre-processing ------
 # Before running the app, load all required models and data
@@ -39,9 +43,9 @@ hgFemaleData <- do.call(rbind, hgFemale_list) %>%
 
 # Suggested color palettes for the app
 # Simple app UI
-ui <- ui <- dashboardPage(
+ui <- dashboardPage(
   dashboardHeader(title = span(
-    tags$img(src = "logo.png", width = "25px"),
+    tags$img(src="logo.png", width = "25px"),
     " Anatogram Demo"
     )),
   dashboardSidebar(disable = TRUE),
@@ -152,7 +156,7 @@ server <- function(input, output, session) {
     )
     if(noCoord){return()}
     paste(
-      "x:", round(input$body_hover$x, 1), 
+      "x:", round(input$body_hover$x, 1),
       "y:", round(abs(input$body_hover$y), 1)
     )
   })
@@ -187,21 +191,21 @@ server <- function(input, output, session) {
       pull(id)
     organName <- unique(organName)
     organLabel <- switch(organName,
-      "aorta" = span(img(icons::health_icons("blood_vessel")), "Aorta"),
-      "small_intestine" = span(img(icons::health_icons("intestine")), "Small Intestine"),
-      "brain" = span(img(icons::health_icons("neurology")), "Brain"),
-      "lung" = span(img(icons::health_icons("lungs")), "Lung"),
-      "liver" = span(img(icons::health_icons("liver-alt")), "Liver"),
-      "heart" = span(img(icons::health_icons("heart")), "Heart"),
-      "pancreas" = span(img(icons::health_icons("pancreas")), "Pancreas"),
-      "kidney" = span(img(icons::health_icons("kidneys")), "Kidney"),
-      "stomach" = span(img(icons::health_icons("stomach")), "Stomach")
+      "aorta" = span(img(src="blood_vessel.svg"), "Aorta"),
+      "small_intestine" = span(img(src="intestine.svg"), "Small Intestine"),
+      "brain" = span(img(src="neurology.svg"), "Brain"),
+      "lung" = span(img(src="lungs.svg"), "Lung"),
+      "liver" = span(img(src="liver-alt.svg"), "Liver"),
+      "heart" = span(img(src="heart.svg"), "Heart"),
+      "pancreas" = span(img(src="pancreas.svg"), "Pancreas"),
+      "kidney" = span(img(src="kidneys.svg"), "Kidney"),
+      "stomach" = span(img(src="stomach.svg"), "Stomach")
     )
     organValue <- simResults %>%
       filter(organ %in% organName, Time == input$time) %>%
       pull(value)
 
-    return(div(organLabel, br(), img(icons::health_icons("blood_bag")), "Vancomycin:", round(organValue, 2), "umol/l"))
+    return(div(organLabel, br(), img(src="blood_bag.svg"), "Vancomycin:", round(organValue, 2), "umol/l"))
   })
 
   # Displayed anatogram
